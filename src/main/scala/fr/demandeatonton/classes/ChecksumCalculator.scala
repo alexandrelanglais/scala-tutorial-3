@@ -1,7 +1,5 @@
 package fr.demandeatonton.classes
 
-import scala.collection.mutable.Map
-
 class ChecksumCalculator {
   private var sum = 0;
 
@@ -10,18 +8,13 @@ class ChecksumCalculator {
 }
 
 object ChecksumCalculator {
-  private val cache = Map[String, Int]()
+  def calculate(s: String): Int = {
 
-  def calculate(s: String): Int =
-    if (cache.contains(s))
-      cache(s)
-    else {
-      val acc = new ChecksumCalculator
-      for (c <- s)
-        acc.add(c.toByte)
+    val acc = new ChecksumCalculator
+    for (c <- s)
+      acc.add(c.toByte)
 
-      val cs = acc.checksum()
-      cache += (s -> cs)
-      cs
-    }
+    val cs = acc.checksum()
+    cs
+  }
 }
